@@ -1,0 +1,60 @@
+.sideBarColor {
+  background-color: #263544 !important;
+}
+.detailBtn {
+  color: white !important;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-decoration: none;
+}
+.eventTitle {
+  font-size: 32px;
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
+}
+.eventProposal {
+  font-size: 32px;
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
+}
+.tableSmallTitle {
+  font-size: 14px;
+  color: red;
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+  @media (max-width: 420px) {
+    font-size: 12px;
+  }
+}
+.function {
+  display: flex;
+  justify-content: center;
+}
+.selection {
+  display: flex;
+  justify-content: center;
+}
+.selectionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+%titleFontSize {
+  font-size: 32px;
+  @media (max-width: 1024px) {
+    font-size: 24px;
+  }
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
+}
