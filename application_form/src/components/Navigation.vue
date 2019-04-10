@@ -5,10 +5,9 @@
         <div class="sidebar-header">
           <h3></h3>
         </div>
-
         <ul class="list-unstyled mt-5 pl-2">
           <li class="my-1">
-            <router-link to="/">
+            <router-link to="/home">
               <font-awesome-icon class="mr-3" icon="home"/>Home
             </router-link>
           </li>
@@ -28,7 +27,7 @@
             </router-link>
           </li>
           <li class="my-1">
-            <router-link to="/logout">
+            <router-link to="/login">
               <font-awesome-icon class="mr-3" icon="sign-in-alt"/>Logout
             </router-link>
           </li>
@@ -49,6 +48,7 @@
 
 <script>
 import $ from "jquery";
+import Vue from 'vue';
 export default {
   name: "navigation",
   mounted() {
@@ -60,6 +60,72 @@ export default {
         $("#sidebar").toggleClass("active");
       });
     });
+  },
+  data: function() {
+    return {
+      id: Number,
+      role: String,
+      position: Number
+    };
+  },
+  created() {
+    this.getSession();
+    this.getUserDetail();
+  },
+  methods: {
+    getUserDetail() {
+      fetch(`${this.$http}/api/user`, {
+        method: "GET",
+        headers: {
+          Authorization: this.getSession()
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+
+          Vue.prototype.$eventStatus = "apply";
+
+          this.id = data.user.id;
+          Vue.prototype.$id = this.id;
+
+          this.role = data.user.role;
+          Vue.prototype.$role = this.role;
+          console.log(this.role);
+
+          if (data.user.position !== null) {
+            this.position = data.user.position;
+            Vue.prototype.$position = this.position;
+            // console.log(this.$pos);
+          }
+        });
+    },
+    logout() {
+      console.log("logout");
+
+      fetch(`${this.$http}/api/adminlogout`, {
+        method: "GET",
+        headers: {
+          Authorization: this.getSession()
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status == 0) {
+            console.log("logout success");
+            localStorage.clear();
+
+            this.$router.push({ name: "login" });
+          }
+        });
+    },
+    getSession() {
+      return (
+        localStorage.getItem("token_type") +
+        " " +
+        localStorage.getItem("access_token")
+      );
+    }
   }
 };
 </script>

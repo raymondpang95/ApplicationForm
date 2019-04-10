@@ -35,6 +35,8 @@ global.$ = jQuery
 
 Vue.config.productionTip = false
 
+Vue.prototype.$http ='http://192.168.1.135/SUC_Student_Union_System/public';
+
 new Vue({
   router,
   store,
